@@ -103,7 +103,7 @@ export const TILE_STATUSES = {
         y: randomNumber(boardSize),
       }
   
-      if (!positions.some( p => positionMatch(p, position))) { // posible bug
+      if (!positions.some(positionMatch.bind(null, position))) {
         positions.push(position)
       }
     }
