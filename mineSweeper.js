@@ -1,4 +1,7 @@
-import { times, range } from "lodash/fp"
+const { times, range } = require("lodash/fp");
+// const { times, range } = require("lodash/fp");
+
+
 
 export const TILE_STATUSES = {
   HIDDEN: "hidden",

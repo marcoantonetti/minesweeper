@@ -1203,7 +1203,7 @@ module.exports = baseConvert;
 var _ = require('./lodash.min').runInContext();
 module.exports = require('./fp/_baseConvert')(_, _);
 
-},{"./lodash.min":"node_modules/lodash/lodash.min.js","./fp/_baseConvert":"node_modules/lodash/fp/_baseConvert.js"}],"minesweeper.js":[function(require,module,exports) {
+},{"./lodash.min":"node_modules/lodash/lodash.min.js","./fp/_baseConvert":"node_modules/lodash/fp/_baseConvert.js"}],"mineSweeper.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1217,13 +1217,17 @@ exports.markTile = markTile;
 exports.markedTilesCount = markedTilesCount;
 exports.positionMatch = positionMatch;
 exports.revealTile = revealTile;
-var _fp = require("lodash/fp");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var _require = require("lodash/fp"),
+  times = _require.times,
+  range = _require.range;
+// const { times, range } = require("lodash/fp");
+
 var TILE_STATUSES = exports.TILE_STATUSES = {
   HIDDEN: "hidden",
   MINE: "mine",
@@ -1231,8 +1235,8 @@ var TILE_STATUSES = exports.TILE_STATUSES = {
   MARKED: "marked"
 };
 function createBoard(boardSize, minePositions) {
-  return (0, _fp.times)(function (x) {
-    return (0, _fp.times)(function (y) {
+  return times(function (x) {
+    return times(function (y) {
       return {
         x: x,
         y: y,
@@ -1341,7 +1345,7 @@ function positionMatch(a, b) {
 function nearbyTiles(board, _ref3) {
   var x = _ref3.x,
     y = _ref3.y;
-  var offsets = (0, _fp.range)(-1, 2);
+  var offsets = range(-1, 2);
   return offsets.flatMap(function (xOffset) {
     return offsets.map(function (yOffset) {
       var _board;
@@ -1354,12 +1358,12 @@ function nearbyTiles(board, _ref3) {
 },{"lodash/fp":"node_modules/lodash/fp.js"}],"script.js":[function(require,module,exports) {
 "use strict";
 
-var _minesweeper = require("./minesweeper.js");
+var _mineSweeper = require("./mineSweeper.js");
 // Display/UI
 
 var BOARD_SIZE = 10;
 var NUMBER_OF_MINES = 7;
-var board = (0, _minesweeper.createBoard)(BOARD_SIZE, getMinePositions(BOARD_SIZE, NUMBER_OF_MINES));
+var board = (0, _mineSweeper.createBoard)(BOARD_SIZE, getMinePositions(BOARD_SIZE, NUMBER_OF_MINES));
 var boardElement = document.querySelector(".board");
 var minesLeftText = document.querySelector("[data-mine-count]");
 var messageText = document.querySelector(".subtext");
@@ -1386,7 +1390,7 @@ function tileToElement(tile) {
 }
 boardElement.addEventListener("click", function (e) {
   if (!e.target.matches("[data-status]")) return;
-  board = (0, _minesweeper.revealTile)(board, {
+  board = (0, _mineSweeper.revealTile)(board, {
     x: parseInt(e.target.dataset.x),
     y: parseInt(e.target.dataset.y)
   });
@@ -1395,7 +1399,7 @@ boardElement.addEventListener("click", function (e) {
 boardElement.addEventListener("contextmenu", function (e) {
   if (!e.target.matches("[data-status]")) return;
   e.preventDefault();
-  board = (0, _minesweeper.markTile)(board, {
+  board = (0, _mineSweeper.markTile)(board, {
     x: parseInt(e.target.dataset.x),
     y: parseInt(e.target.dataset.y)
   });
@@ -1404,11 +1408,11 @@ boardElement.addEventListener("contextmenu", function (e) {
 boardElement.style.setProperty("--size", BOARD_SIZE);
 render();
 function listMinesLeft() {
-  minesLeftText.textContent = NUMBER_OF_MINES - (0, _minesweeper.markedTilesCount)(board);
+  minesLeftText.textContent = NUMBER_OF_MINES - (0, _mineSweeper.markedTilesCount)(board);
 }
 function checkGameEnd() {
-  var win = (0, _minesweeper.checkWin)(board);
-  var lose = (0, _minesweeper.checkLose)(board);
+  var win = (0, _mineSweeper.checkWin)(board);
+  var lose = (0, _mineSweeper.checkLose)(board);
   if (win || lose) {
     boardElement.addEventListener("click", stopProp, {
       capture: true
@@ -1424,8 +1428,8 @@ function checkGameEnd() {
     messageText.textContent = "You Lose";
     board.forEach(function (row) {
       row.forEach(function (tile) {
-        if (tile.status === _minesweeper.TILE_STATUSES.MARKED) board = (0, _minesweeper.markTile)(board, tile);
-        if (tile.mine) board = (0, _minesweeper.revealTile)(board, tile);
+        if (tile.status === _mineSweeper.TILE_STATUSES.MARKED) board = (0, _mineSweeper.markTile)(board, tile);
+        if (tile.mine) board = (0, _mineSweeper.revealTile)(board, tile);
       });
     });
   }
@@ -1440,7 +1444,7 @@ function getMinePositions(boardSize, numberOfMines) {
       x: randomNumber(boardSize),
       y: randomNumber(boardSize)
     };
-    if (!positions.some(_minesweeper.positionMatch.bind(null, position))) {
+    if (!positions.some(_mineSweeper.positionMatch.bind(null, position))) {
       positions.push(position);
     }
   }
@@ -1449,7 +1453,7 @@ function getMinePositions(boardSize, numberOfMines) {
 function randomNumber(size) {
   return Math.floor(Math.random() * size);
 }
-},{"./minesweeper.js":"minesweeper.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./mineSweeper.js":"mineSweeper.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
