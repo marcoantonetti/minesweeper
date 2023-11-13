@@ -4,7 +4,7 @@
   "description": "In accordance with functional programming principles, all of the functions in this proyect are pure\r and the only variable mutations are located at the top of script.js file.",
   "main": "mineSweeper.js",
   "scripts": {
-    "build": "parcel build index.html && npm i --save-dev nodash",
+    "build": "parcel build index.html && npm i lodash",
     "start": "parcel index.html"
   },
   "repository": {
@@ -18,10 +18,8 @@
     "url": "https://github.com/marcoantonetti/minesweeper/issues"
   },
   "homepage": "https://github.com/marcoantonetti/minesweeper#readme",
-  "dependencies": {
-    "lodash": "^4.17.21"
-  },
   "devDependencies": {
+    "lodash": "^4.17.21",
     "parcel-bundler": "^1.12.5"
   }
 }
