@@ -1,0 +1,19 @@
+In accordance with functional programming principles, all of the functions in this proyect are pure
+and the only variable mutations are located at the top of script.js file.
+
+I used some functions from nodash library and set up parcel as my bundler
+
+Each tile has two events, right click and left click. Left click calls the revealTile function and right click calls the markTile function.
+
+Each time a click is made, a new board is created with that change and then it is rendered. Rather than mutating the existing board. --> functional programming 
+
+To reveal adjacent tiles, when there are no mines nearby, the nearbyTiles function is called. This function returns an array with the {x,y} coordinates of
+the tiles that are adjacent to the clicked tile.
+Then we filter this array looking for tiles that are mines, if there are not then we reveal the nearby tiles. If there are mines then the tile shows how many mines are nearby
+
+Since we want to do this when a tile is left clicked, we call the nearbyTiles function inside the revealTile function.
+
+The markTile function is called when the user right clicks a tile thinking that is a mine. So a minesLeft function is called after the markTile to update how many mines are supossely left.
+
+Finally checkGameEnd function is also called when a tile is left clicked.
+

@@ -1,0 +1,27 @@
+{
+  "name": "minesweeper",
+  "version": "1.0.0",
+  "description": "In accordance with functional programming principles, all of the functions in this proyect are pure\r and the only variable mutations are located at the top of script.js file.",
+  "main": "mineSweeper.js",
+  "scripts": {
+    "build": "parcel build index.html",
+    "start": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcoantonetti/minesweeper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcoantonetti/minesweeper/issues"
+  },
+  "homepage": "https://github.com/marcoantonetti/minesweeper#readme",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
+}
