@@ -4,7 +4,7 @@
   "description": "In accordance with functional programming principles, all of the functions in this proyect are pure\r and the only variable mutations are located at the top of script.js file.",
   "main": "mineSweeper.js",
   "scripts": {
-    "build": "parcel build index.html",
+    "build": "parcel build index.html && npm i --save-dev nodash",
     "start": "parcel index.html"
   },
   "repository": {
