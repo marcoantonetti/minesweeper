@@ -1,3 +1,5 @@
+MINESWEEPER GAME - With unit and E2E testing - Functional programming - Parcel bundler
+
 In accordance with functional programming principles, all of the functions in this proyect are pure
 and the only variable mutations are located at the top of script.js file.
 
@@ -16,4 +18,11 @@ Since we want to do this when a tile is left clicked, we call the nearbyTiles fu
 The markTile function is called when the user right clicks a tile thinking that is a mine. So a minesLeft function is called after the markTile to update how many mines are supossely left.
 
 Finally checkGameEnd function is also called when a tile is left clicked.
+
+INSTRUCTIONS 
+
+TO RUN APP --> npm start (it runs on http://localhost:1234)
+TO UNIT TEST --> npm run test
+TO E2E TEST --> npm run test:e2e (cypress also runs on http://localhost:1234)
+
 

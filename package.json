@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "In accordance with functional programming principles, all of the functions in this proyect are pure\r and the only variable mutations are located at the top of script.js file.",
   "main": "mineSweeper.js",
+  "type": "module",
   "scripts": {
     "build": "parcel build index.html && npm i lodash",
-    "start": "parcel index.html"
+    "start": "parcel index.html",
+    "test": "jest --coverage",
+    "cy:open": "cypress open",
+    "test:e2e": "start-server-and-test start http://localhost:1234 cy:open"
   },
   "repository": {
     "type": "git",
@@ -19,10 +23,21 @@
   },
   "homepage": "https://github.com/marcoantonetti/minesweeper#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.23.3",
+    "cypress": "^13.5.1",
+    "jest": "^29.7.0",
     "lodash": "^4.17.21",
     "parcel-bundler": "^1.12.5"
   },
   "dependencies": {
-    "lodash.js": "^0.0.1-security"
+    "@babel/core": "^7.23.3",
+    "http-server": "^14.1.1",
+    "lodash.js": "^0.0.1-security",
+    "start-server-and-test": "^2.0.3"
+  },
+  "jest": {
+    "testMatch": [
+      "<rootDir>/__tests__/**/*.test.js"
+    ]
   }
 }

@@ -1217,17 +1217,14 @@ exports.markTile = markTile;
 exports.markedTilesCount = markedTilesCount;
 exports.positionMatch = positionMatch;
 exports.revealTile = revealTile;
+var _fp = require("./node_modules/lodash/fp");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-var _require = require("lodash/fp"),
-  times = _require.times,
-  range = _require.range;
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); } // const { times, range } = require("/node_modules/lodash/fp");
 // const { times, range } = require("lodash/fp");
-
 var TILE_STATUSES = exports.TILE_STATUSES = {
   HIDDEN: "hidden",
   MINE: "mine",
@@ -1235,8 +1232,8 @@ var TILE_STATUSES = exports.TILE_STATUSES = {
   MARKED: "marked"
 };
 function createBoard(boardSize, minePositions) {
-  return times(function (x) {
-    return times(function (y) {
+  return (0, _fp.times)(function (x) {
+    return (0, _fp.times)(function (y) {
       return {
         x: x,
         y: y,
@@ -1345,7 +1342,7 @@ function positionMatch(a, b) {
 function nearbyTiles(board, _ref3) {
   var x = _ref3.x,
     y = _ref3.y;
-  var offsets = range(-1, 2);
+  var offsets = (0, _fp.range)(-1, 2);
   return offsets.flatMap(function (xOffset) {
     return offsets.map(function (yOffset) {
       var _board;
@@ -1355,15 +1352,20 @@ function nearbyTiles(board, _ref3) {
     return tile != null;
   });
 }
-},{"lodash/fp":"node_modules/lodash/fp.js"}],"script.js":[function(require,module,exports) {
+},{"./node_modules/lodash/fp":"node_modules/lodash/fp.js"}],"script.js":[function(require,module,exports) {
 "use strict";
 
 var _mineSweeper = require("./mineSweeper.js");
-// Display/UI
-
-var BOARD_SIZE = 10;
-var NUMBER_OF_MINES = 7;
-var board = (0, _mineSweeper.createBoard)(BOARD_SIZE, getMinePositions(BOARD_SIZE, NUMBER_OF_MINES));
+var _testBoard$length, _testBoard, _testBoard$flat$filte, _testBoard2, _testBoard3; // Display/UI
+var testBoard;
+if ("development" !== "production" && window.testBoard) {
+  testBoard = window.testBoard;
+}
+var BOARD_SIZE = (_testBoard$length = (_testBoard = testBoard) === null || _testBoard === void 0 ? void 0 : _testBoard.length) !== null && _testBoard$length !== void 0 ? _testBoard$length : 10;
+var NUMBER_OF_MINES = (_testBoard$flat$filte = (_testBoard2 = testBoard) === null || _testBoard2 === void 0 ? void 0 : _testBoard2.flat().filter(function (t) {
+  return t.mine;
+}).length) !== null && _testBoard$flat$filte !== void 0 ? _testBoard$flat$filte : 7;
+var board = (_testBoard3 = testBoard) !== null && _testBoard3 !== void 0 ? _testBoard3 : (0, _mineSweeper.createBoard)(BOARD_SIZE, getMinePositions(BOARD_SIZE, NUMBER_OF_MINES));
 var boardElement = document.querySelector(".board");
 var minesLeftText = document.querySelector("[data-mine-count]");
 var messageText = document.querySelector(".subtext");
@@ -1478,7 +1480,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51642" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55088" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
