@@ -1,5 +1,3 @@
-// const { times, range } = require("/node_modules/lodash/fp");
-// const { times, range } = require("lodash/fp");
 import {times, range} from "./node_modules/lodash/fp"
 
 
